@@ -12,6 +12,7 @@
 		FD31099E1E4AA4DC00170C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD31099C1E4AA4DC00170C2B /* Main.storyboard */; };
 		FD3109A01E4AA4DC00170C2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD31099F1E4AA4DC00170C2B /* Assets.xcassets */; };
 		FD3109A31E4AA4DC00170C2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD3109A11E4AA4DC00170C2B /* LaunchScreen.storyboard */; };
+		FD76BA631E4C0C2600940794 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD76BA621E4C0C2600940794 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		FD31099F1E4AA4DC00170C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD3109A21E4AA4DC00170C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD3109A41E4AA4DC00170C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD76BA621E4C0C2600940794 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD76BA631E4C0C2600940794 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		FD31098C1E4AA4DC00170C2B = {
 			isa = PBXGroup;
 			children = (
+				FD76BA621E4C0C2600940794 /* MapKit.framework */,
 				FD3109971E4AA4DC00170C2B /* MapasMDA */,
 				FD3109961E4AA4DC00170C2B /* Products */,
 			);
@@ -96,6 +100,11 @@
 				TargetAttributes = {
 					FD3109941E4AA4DC00170C2B = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -286,6 +295,7 @@
 				FD3109A91E4AA4DC00170C2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
