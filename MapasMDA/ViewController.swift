@@ -30,9 +30,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         centerMapOnLocation(appleCoordinates)
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        if status == .AuthorizedWhenInUse{
+        if status == .authorizedWhenInUse{
             locationManager.startUpdatingLocation()
             map.showsUserLocation = true
         } else{
@@ -40,36 +40,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             map.showsUserLocation = false
         }
     }
-    func centerMapOnLocation(location: CLLocation){
+    func centerMapOnLocation(_ location: CLLocation){
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    var latestLocation: CLLocation?
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let info = locations[0]
+        guard let existingLatestLocation = latestLocation else {
+            latestLocation = locations.last
+            return
+        }
         
-        var location = CLLocationCoordinate2D()
-        location.latitude = (info.coordinate.latitude)
-        location.longitude = (info.coordinate.longitude)
+        guard let newLocation = locations.last else {
+            assert(false, "Expecting a location in the location array but it's empty")
+            return
+        }
+        
+        let distance = existingLatestLocation.distance(from: newLocation)
+        
+        var loc = CLLocationCoordinate2D()
+        loc.latitude = (newLocation.coordinate.latitude)
+        loc.longitude = (newLocation.coordinate.longitude)
         
         let pin = MKPointAnnotation()
-        pin.coordinate = location
-        pin.title = "Lat = \(location.latitude) Long = \(location.longitude)"
-        pin.subtitle = ""
+        pin.coordinate = loc
+        pin.title = "Lat = \(loc.latitude) Long = \(loc.longitude)"
+        pin.subtitle = "Distancia= \(distance)"
         map.addAnnotation(pin)
     }
     
     
     @IBAction func normal() {
-        map.mapType = .Standard
+        map.mapType = .standard
     }
     
     @IBAction func satelital() {
-        map.mapType = .Satellite
+        map.mapType = .satellite
     }
     @IBAction func hibrido() {
-        map.mapType = .Hybrid
+        map.mapType = .hybrid
     }
 }
 
